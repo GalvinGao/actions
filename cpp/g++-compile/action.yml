@@ -16,6 +16,11 @@ inputs:
     description: 'The output file name.'
     required: true
     default: 'main'
+  
+  extra-args:
+    description: 'Extra arguments to pass to the compiler.'
+    required: false
+    default: '-O3'
 
 runs:
   using: composite
@@ -28,4 +33,4 @@ runs:
     
     - name: "Compile C++"
       shell: bash
-      run: g++ -std=${{ inputs.cpp-standard }} ${{ inputs.cpp-entrypoint }} -o ${{ inputs.output }}
+      run: g++ -Wall -std=${{ inputs.cpp-standard }} ${{ inputs.cpp-entrypoint }} ${{ inputs.extra-args }} -o ${{ inputs.output }}
