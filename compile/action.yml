@@ -1,0 +1,26 @@
+name: 'Compile C++'
+description: 'This action will compile the C++ program in an appropriate environment.'
+
+inputs:
+  cpp-standard:
+    description: 'The C++ standard to use.'
+    required: true
+    default: 'c++14'
+  
+  cpp-entrypoint:
+    description: 'The entrypoint of the C++ program.'
+    required: true
+    default: 'main.cpp'
+
+runs:
+  using: composite
+  steps:
+    - name: "Set up GCC"
+      uses: egor-tensin/setup-gcc@v1
+      with:
+        version: 9
+        platform: x64
+    
+    - name: "Compile C++"
+      shell: bash
+      run: g++ -std=${{ inputs.cpp-standard }} ${{ inputs.cpp-entrypoint }} -o main
