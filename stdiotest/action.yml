@@ -27,4 +27,4 @@ runs:
     
     - name: "Run stdiotest"
       shell: bash
-      run: stdiotest -p ${{ inputs.parallelism }} -v=${{ inputs.verbose }}
+      run: stdiotest -p=${{ inputs.parallelism }} -v=${{ inputs.verbose }}
