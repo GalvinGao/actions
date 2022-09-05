@@ -11,6 +11,11 @@ inputs:
     description: 'The entrypoint of the C++ program.'
     required: true
     default: 'main.cpp'
+  
+  output:
+    description: 'The output file name.'
+    required: true
+    default: 'main'
 
 runs:
   using: composite
@@ -23,4 +28,4 @@ runs:
     
     - name: "Compile C++"
       shell: bash
-      run: g++ -std=${{ inputs.cpp-standard }} ${{ inputs.cpp-entrypoint }} -o main
+      run: g++ -std=${{ inputs.cpp-standard }} ${{ inputs.cpp-entrypoint }} -o ${{ inputs.output }}
