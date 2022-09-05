@@ -1,0 +1,30 @@
+name: 'Run stdiotest'
+description: 'Runs stdiotest (https://github.com/GalvinGao/stdiotest)'
+
+inputs:
+  parallelism:
+    description: 'The number of parallel processes to run.'
+    required: true
+    default: '1'
+  
+  verbose:
+    description: 'Whether to print verbose output.'
+    required: true
+    default: 'true'
+
+runs:
+  using: composite
+  steps:
+    - name: "Set up Go"
+      uses: actions/setup-go@v2
+      with:
+        go-version: 1.19
+        stable: true
+    
+    - name: "Install stdiotest"
+      shell: bash
+      run: go install github.com/GalvinGao/stdiotest@latest
+    
+    - name: "Run stdiotest"
+      shell: bash
+      run: stdiotest -p ${{ inputs.parallelism }} -v=${{ inputs.verbose }}
