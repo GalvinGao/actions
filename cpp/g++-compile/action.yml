@@ -25,7 +25,7 @@ inputs:
 runs:
   using: composite
   steps:
-    - name: "Set up GCC"
+    - name: "Setup GCC"
       uses: egor-tensin/setup-gcc@v1
       with:
         version: 9
@@ -33,4 +33,4 @@ runs:
     
     - name: "Compile C++"
       shell: bash
-      run: g++ -Wall -std=${{ inputs.cpp-standard }} ${{ inputs.cpp-entrypoint }} ${{ inputs.extra-args }} -o ${{ inputs.output }}
+      run: g++-9 -Wall -std=${{ inputs.cpp-standard }} ${{ inputs.cpp-entrypoint }} ${{ inputs.extra-args }} -o ${{ inputs.output }}
