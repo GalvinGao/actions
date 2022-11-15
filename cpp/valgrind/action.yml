@@ -1,0 +1,25 @@
+name: "Run Valgrind"
+description: "This action will run Valgrind on the C++ program in an appropriate environment."
+
+inputs:
+  executable:
+    description: "The name of the executable to run."
+    required: true
+
+  extra-args:
+    description: "Extra arguments to pass to Valgrind."
+    required: false
+    default: "--leak-check=full --show-leak-kinds=all"
+
+runs:
+  using: composite
+  steps:
+    - name: "Install Valgrind"
+      shell: bash
+      run: |
+        sudo apt install valgrind
+        echo "Valgrind installed"
+
+    - name: "Run Valgrind"
+      shell: bash
+      run: valgrind ${{ inputs.extra-args }} --error-exitcode=1 ./${{ inputs.executable }}
