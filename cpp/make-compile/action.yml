@@ -10,7 +10,6 @@ inputs:
   task:
     description: "The task to run."
     required: true
-    default: "all"
 
 runs:
   using: composite
