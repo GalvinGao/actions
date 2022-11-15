@@ -1,0 +1,20 @@
+name: "Compile using Make"
+description: "This action will compile the C++ program using Make in an appropriate environment."
+
+inputs:
+  overrides:
+    description: "The Make overrides to use."
+    required: false
+    default: "CC=g++-9"
+
+  task:
+    description: "The task to run."
+    required: true
+    default: "all"
+
+runs:
+  using: composite
+  steps:
+    - name: "Compile using Make"
+      shell: bash
+      run: make ${{ inputs.overrides }} ${{ inputs.task }}
