@@ -15,10 +15,10 @@ runs:
   using: composite
   steps:
     - name: "Install Valgrind"
-      shell: bash
-      run: |
-        sudo apt install valgrind
-        echo "Valgrind installed"
+      uses: awalsh128/cache-apt-pkgs-action@latest
+      with:
+        packages: valgrind
+        version: 1.0
 
     - name: "Run Valgrind"
       shell: bash
